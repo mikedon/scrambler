@@ -27,7 +27,6 @@ Penguins are here as well.
  */
 
 
-const minimist = require("minimist");
 const meow = require("meow");
 const SpellChecker = require("simple-spellchecker");
 const Image = require("ascii-art-image");
@@ -53,7 +52,7 @@ function unscrambleWithSecret(cipher, secret) {
 function unscrambleWithoutSecret(cipher) {
     let dictionary = SpellChecker.getDictionarySync("en-US");
     let possibleTexts = [];
-    for(let i = 0; i < 26; i++) {
+    for(let i = 0; i < 27; i++) {
         let text = unscrambleWithSecret(cipher, i);
         // console.log(text);
         let words = text.split(" ");        
@@ -69,7 +68,7 @@ function unscrambleWithoutSecret(cipher) {
 
 const cli = meow(`
     Usage
-        $scrambler.js <cmd> 
+        $ ./scrambler.js <cmd> 
     
     Commands
         scramble    Scramble text using given secret
@@ -80,11 +79,12 @@ const cli = meow(`
         --text, -t  text to be scrambled
         --secret, -s secret to use to scramble (must be a number between 1-26)
         --cipher, -c scrambled text
+        --penguin, -p penguin image (must be a number between 1-5)
 
     Examples
-        scrambler.js scramble -t hello -s 5
-        scramble.js unscramble -c ifmmp -s 5
-        scramble.js codebreaker -c ifmmp
+        $ ./scrambler.js scramble -t "hello" -s 5
+        $ ./scrambler.js unscramble -c "ifmmp" -s 5
+        $ ./scrambler.js codebreaker -c "ifmmp"
 `, {
     flags: {
         cmd: {
@@ -107,7 +107,7 @@ const cli = meow(`
         penguin: {
             type: "number",
             alias: "p",
-            default: 4
+            default: 2
         }
     }
 });

@@ -1,4 +1,4 @@
 Instructions:
 
 npm install
-scrambler.js -h
+./scrambler.js --help
